@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale_name }}">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Minimal Form Interface</title>
+		<meta name="description" content="Minimal Form Interface: Simplistic, single input view form" />
+		<meta name="keywords" content="form, minimal, interface, single input, big form, responsive form, transition" />
+		<meta name="author" content="Codrops" />
+
+        <link href="{{request.static_url('webdiario:static/css/normalize.css')}}" rel="stylesheet">
+        <link href="{{request.static_url('webdiario:static/css/demo.css')}}" rel="stylesheet">
+        <link href="{{request.static_url('webdiario:static/css/component.css')}}" rel="stylesheet">
+{#		<link rel="stylesheet" type="text/css" href="css/normalize.css" />#}
+{#		<link rel="stylesheet" type="text/css" href="css/demo.css" />#}
+{#		<link rel="stylesheet" type="text/css" href="css/component.css" />#}
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="{{request.static_url('webdiario:static/js/modernizr.custom.js')}}"></script>
+		<script src="{{request.static_url('webdiario:static/js/jquery.mask.min.js')}}"></script>
+		<script src="{{request.static_url('webdiario:static/js/classie.js')}}"></script>
+		<script src="{{request.static_url('webdiario:static/js/stepsForm.js')}}"></script>
+{#		<script src="js/modernizr.custom.js"></script>#}
+{#		<script type="text/javascript" src="js/jquery.mask.min.js"></script>#}
+	</head>
+	<body>
+		<div class="container">
+			<!-- Top Navigation -->
+			<header class="codrops-header">
+				<h1>Diário Pai d'égua<span></span></h1>	
+			</header>
+			<section>
+				<form id="theForm" class="simform" autocomplete="off">
+					<div class="simform-inner">
+						<ol class="questions">
+							<li>
+								<span><label for="nome">Seu nome completo?</label></span>
+								<input id="nome" name="nome" type="text"/>
+							</li>
+							<li>
+								<span><label for="cpf">Digite seu cpf?</label></span>
+								<input id="cpf" name="cpf" type="text"/>
+							</li>
+						</ol><!-- /questions -->
+						<button class="submit" type="submit">Send answers</button>
+						<div class="controls">
+							<button class="next"></button>
+							<div class="progress"></div>
+							<span class="number">
+								<span class="number-current"></span>
+								<span class="number-total"></span>
+							</span>
+							<span class="error-message"></span>
+						</div><!-- / controls -->
+					</div><!-- /simform-inner -->
+					<span class="final-message"></span>
+				</form><!-- /simform -->			
+			</section>
+		</div><!-- /container -->
+		<div hidden="true" id="result">
+			<ul>
+				<li>Páginas 1</li>
+				<li>Páginas 12</li>
+				<li>Páginas 20</li>
+				<li>Páginas 30</li>
+			</ul>
+		</div>
+		<script>
+			$(function() {
+				console.log('Mikael Lindo!');
+				console.log('Silvarney Gay!');
+				$('#cpf').mask('000.000.000-00');
+			});
+			var theForm = document.getElementById( 'theForm' );
+
+			new stepsForm( theForm, {
+				onSubmit : function( form ) {
+					// hide form
+					classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
+
+					/*
+					form.submit()
+					or
+					AJAX request (maybe show loading indicator while we don't have an answer..)
+					*/
+
+					// let's just simulate something...
+					var messageEl = theForm.querySelector( '.final-message' );
+                    messageEl.innerHTML = "Consulta realizado com sucesso!"
+					classie.addClass( messageEl, 'show' );
+
+                    $.ajax('/query', {data: { nome: $('#nome').val(), cpf: $('#cpf').val() },
+                       success: function(data) {
+                           $('#result').html(data);
+                           $('#result').show();
+                       }
+                    }); // end ajax
+				}
+			} );
+		</script>
+	</body>
+</html>

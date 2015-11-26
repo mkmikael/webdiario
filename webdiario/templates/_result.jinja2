@@ -1,0 +1,16 @@
+<table>
+    <thead>
+        <tr>
+            <th>Nº Diário</th>
+            <th>Pág</th>
+        </tr>
+    </thead>
+    {% for i in result %}
+    <tbody>
+        <tr>
+            <td>{{ i['numero'] }}</td>
+            <td>{{ i['page'] }}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
