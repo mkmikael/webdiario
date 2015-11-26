@@ -1,3 +1,5 @@
+PyPdf2
+requests
 pyramid
 pyramid_chameleon
 pyramid_jinja2

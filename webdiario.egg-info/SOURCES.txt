@@ -18,4 +18,12 @@ webdiario/static/pyramid-16x16.png
 webdiario/static/pyramid.png
 webdiario/static/theme.css
 webdiario/static/theme.min.css
+webdiario/static/css/component.css
+webdiario/static/css/demo.css
+webdiario/static/css/normalize.css
+webdiario/static/fonts/codropsicons/license.txt
+webdiario/static/js/classie.js
+webdiario/static/js/jquery.mask.min.js
+webdiario/static/js/modernizr.custom.js
+webdiario/static/js/stepsForm.js
 webdiario/templates/mytemplate.pt
